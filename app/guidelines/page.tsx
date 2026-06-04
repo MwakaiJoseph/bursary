@@ -76,7 +76,7 @@ export default function GuidelinesPage() {
             <div className="mt-3 h-1 w-20 rounded-full bg-ngcdf-primary" aria-hidden />
             <p className="mt-5 text-sm leading-relaxed text-ngcdf-grey sm:mt-6 sm:text-base">
               Follow these guidelines to prepare a complete bursary application.
-              Requirements may vary slightly by constituency — always confirm with
+              Requirements may vary slightly by constituency, always confirm with
               your local NG-CDF office.
             </p>
           </div>

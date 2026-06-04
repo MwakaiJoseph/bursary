@@ -50,7 +50,7 @@ export default function AboutPage() {
               </p>
               <p>
                 Digitization transforms how bursaries are requested, reviewed, and
-                disbursed — moving from paper-heavy, inconsistent processes toward a
+                disbursed, moving from paper-heavy, inconsistent processes toward a
                 modern public service that is faster, fairer, and easier to oversee.
               </p>
               <p>
