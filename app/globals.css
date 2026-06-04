@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --ngcdf-primary: #005a36;
-  --ngcdf-primary-alt: #065f46;
-  --ngcdf-dark: #064e3b;
+  --ngcdf-primary: #1b4d3e;
+  --ngcdf-primary-alt: #1b4d3e;
+  --ngcdf-dark: #153d32;
   --ngcdf-light-bg: #e8f5ee;
   --ngcdf-page-bg: #f8fafc;
   --ngcdf-text: #111827;

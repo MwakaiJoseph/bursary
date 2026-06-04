@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
@@ -11,9 +12,9 @@ import {
   LogIn,
   Menu,
   X,
-  Shield,
 } from "lucide-react";
 import { NAV_LINKS, SITE_NAME, SITE_SUBTITLE } from "@/lib/constants";
+import logo from "@/uploads/logo.png";
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Home,
@@ -31,10 +32,12 @@ export function Header({ activePath }: HeaderProps) {
   const pathname = usePathname();
   const current = activePath ?? pathname;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
-  useEffect(() => {
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setMobileOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     if (mobileOpen) {
@@ -56,32 +59,35 @@ export function Header({ activePath }: HeaderProps) {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-ngcdf-border bg-white shadow-sm">
-      <div className="page-container flex items-center justify-between gap-3 py-3 sm:gap-4 sm:py-3.5">
+    <header className="sticky top-0 z-50 w-full border-b border-ngcdf-border bg-white">
+      <div className="page-container flex items-center justify-between gap-3 py-3 sm:gap-4 sm:py-4">
         <Link
           href="/"
           className="flex min-w-0 shrink items-center gap-2 sm:gap-3"
           onClick={() => setMobileOpen(false)}
         >
-          <div
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-ngcdf-primary bg-ngcdf-light-bg sm:h-12 sm:w-12"
-            aria-hidden
-          >
-            <Shield className="h-5 w-5 text-ngcdf-primary sm:h-6 sm:w-6" />
+          <div className="relative h-11 w-11 shrink-0 sm:h-14 sm:w-14">
+            <Image
+              src={logo}
+              alt="Coat of Arms of Kenya — NG-CDF Bursary System"
+              fill
+              className="object-contain object-left"
+              sizes="(max-width: 640px) 44px, 56px"
+              priority
+            />
           </div>
-          <div className="min-w-0">
-            <p className="truncate text-base font-bold tracking-tight text-ngcdf-primary sm:text-lg">
+          <div className="min-w-0 leading-tight">
+            <p className="text-lg font-bold text-ngcdf-primary sm:text-xl">
               {SITE_NAME}
             </p>
-            <p className="truncate text-[10px] font-semibold tracking-widest text-ngcdf-grey sm:text-xs">
+            <p className="text-[10px] font-medium tracking-[0.2em] text-ngcdf-grey sm:text-xs">
               {SITE_SUBTITLE}
             </p>
           </div>
         </Link>
 
-        {/* Tablet + Desktop navigation */}
         <nav
-          className="hidden items-center gap-0.5 lg:flex"
+          className="hidden items-center gap-1 lg:flex"
           aria-label="Main navigation"
         >
           {NAV_LINKS.map(({ href, label }) => {
@@ -89,28 +95,29 @@ export function Header({ activePath }: HeaderProps) {
               href === "/"
                 ? current === "/"
                 : current === href || current.startsWith(`${href}?`);
+            const showIcon = label === "Login";
             const Icon = ICON_MAP[label] ?? Home;
+
             return (
               <Link
                 key={href}
                 href={href}
-                className={`touch-target flex items-center gap-1.5 px-2.5 py-2 text-sm font-medium transition-colors xl:px-3 ${
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-ngcdf-primary transition-colors ${
                   isActive
-                    ? "border-b-2 border-ngcdf-primary text-ngcdf-primary"
-                    : "border-b-2 border-transparent text-ngcdf-text hover:text-ngcdf-primary"
+                    ? "border-b-2 border-ngcdf-primary"
+                    : "border-b-2 border-transparent hover:opacity-80"
                 }`}
               >
-                <Icon className="h-4 w-4 shrink-0" aria-hidden />
+                {showIcon && <Icon className="h-4 w-4 shrink-0" aria-hidden />}
                 <span className="whitespace-nowrap">{label}</span>
               </Link>
             );
           })}
         </nav>
 
-        {/* Mobile + small tablet menu button */}
         <button
           type="button"
-          className="touch-target flex shrink-0 items-center justify-center rounded-lg p-2 text-ngcdf-text lg:hidden"
+          className="touch-target flex shrink-0 items-center justify-center rounded-lg p-2 text-ngcdf-primary lg:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
@@ -124,11 +131,10 @@ export function Header({ activePath }: HeaderProps) {
         </button>
       </div>
 
-      {/* Mobile / tablet slide-down menu */}
       {mobileOpen && (
         <>
           <div
-            className="fixed inset-0 top-[57px] z-40 bg-black/20 lg:hidden sm:top-[61px]"
+            className="fixed inset-0 top-[60px] z-40 bg-black/20 lg:hidden sm:top-[68px]"
             aria-hidden
             onClick={() => setMobileOpen(false)}
           />
@@ -152,10 +158,12 @@ export function Header({ activePath }: HeaderProps) {
                       className={`touch-target flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium ${
                         isActive
                           ? "bg-ngcdf-light-bg text-ngcdf-primary"
-                          : "text-ngcdf-text active:bg-gray-100"
+                          : "text-ngcdf-primary active:bg-gray-50"
                       }`}
                     >
-                      <Icon className="h-5 w-5 shrink-0" />
+                      {label === "Login" && (
+                        <Icon className="h-5 w-5 shrink-0" />
+                      )}
                       {label}
                     </Link>
                   </li>

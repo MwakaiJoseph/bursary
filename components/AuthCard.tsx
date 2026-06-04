@@ -7,13 +7,9 @@ import { SelectInput } from "./SelectInput";
 import { Toast } from "./Toast";
 import { LEARNING_LEVELS } from "@/lib/constants";
 
-type AuthCardProps = {
-  constituency: string;
-};
-
 type Tab = "login" | "register";
 
-export function AuthCard({ constituency: _constituency }: AuthCardProps) {
+export function AuthCard() {
   const [tab, setTab] = useState<Tab>("login");
   const [showPassword, setShowPassword] = useState(false);
   const [toast, setToast] = useState<string | null>(null);

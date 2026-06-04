@@ -23,7 +23,7 @@ export default async function AuthPage({ searchParams }: AuthPageProps) {
           <div className="grid grid-cols-1 items-start gap-8 md:gap-10 lg:grid-cols-2 lg:gap-12">
             {/* Auth form first on mobile */}
             <div className="order-1 w-full min-w-0 lg:order-2">
-              <AuthCard constituency={constituency} />
+              <AuthCard />
             </div>
 
             <div className="order-2 w-full min-w-0 lg:order-1">
@@ -62,12 +62,6 @@ export default async function AuthPage({ searchParams }: AuthPageProps) {
                   <p>Call our support line: 020 123 4567</p>
                   <p className="mt-1">Mon – Fri, 8:00 AM - 5:00 PM</p>
                 </InfoCard>
-              </div>
-
-              <div className="mt-6 rounded-xl border border-dashed border-ngcdf-border bg-white/60 p-3 text-xs leading-relaxed text-ngcdf-grey sm:mt-8 sm:p-4">
-                Future system: role-based access for applicants, constituency
-                officers, and national administrators · full audit trail · data
-                protection compliance
               </div>
             </div>
           </div>

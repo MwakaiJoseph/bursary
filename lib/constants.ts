@@ -45,7 +45,7 @@ export const HOME_FEATURES = [
   {
     title: "Better Future",
     description: "Investing in education for a better tomorrow",
-    icon: "graduation-cap" as const,
+    icon: "landmark" as const,
   },
 ];
 

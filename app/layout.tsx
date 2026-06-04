@@ -27,8 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full scroll-smooth`}>
-      <body className="flex min-h-full min-w-0 flex-col overflow-x-hidden antialiased">
+    <html
+      lang="en"
+      className={`${inter.variable} h-full scroll-smooth`}
+      data-scroll-behavior="smooth"
+    >
+      <body
+        className="flex min-h-full min-w-0 flex-col overflow-x-hidden antialiased"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
